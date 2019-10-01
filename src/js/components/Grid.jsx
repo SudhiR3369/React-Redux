@@ -11,24 +11,24 @@ class Grid extends Component {
         super(props);
         this.state = {
             columnDefs: [{
-                headerName: "FirstName", field: "firstName", sortable: true
+                headerName: "FirstName", field: "firstName", sortable: true, filter: true, checkboxSelection: true
             },
             {
-                headerName: "LastName", field: "lastName", sortable: true
+                headerName: "LastName", field: "lastName", sortable: true, filter: true
             }, {
-                headerName: "Address", field: "address", sortable: true
+                headerName: "Address", field: "address", sortable: true, filter: true
             },
             {
-                headerName: "ContactNo", field: "contactNo", sortable: true
+                headerName: "ContactNo", field: "contactNo", sortable: true, filter: true
             },
             {
-                headerName: "Email", field: "email", sortable: true
+                headerName: "Email", field: "email", sortable: true, filter: true
             },
             {
-                headerName: "RoleName", field: "roleName", sortable: true
+                headerName: "RoleName", field: "roleName", sortable: true, filter: true
             },
             {
-                headerName: "Username", field: "username", sortable: true
+                headerName: "Username", field: "username", sortable: true, filter: true
             }]
         };
     }
@@ -41,28 +41,43 @@ class Grid extends Component {
         //     .then(rowData => this.setState({ rowData }));
     }
 
-    render() {        
+    render() {
         return (
             <div
                 className="ag-theme-balham"
                 style={{
-                    height: '500px',
-                    width: '600px'
+                    height: '1000px',
+                    width: '100%'
                 }}
             >
-                <AgGridReact
-                    columnDefs={this.state.columnDefs}
-                    rowData={this.props.users}>
-                </AgGridReact>
+                <div style={{ height: '150px', width: '600px' }} className="ag-theme-balham">
+                    <button onClick={this.onButtonClick}>Get selected rows</button>
+
+                    <AgGridReact
+                        onGridReady={params => this.gridApi = params.api}
+                        rowSelection="multiple"
+                        columnDefs={this.state.columnDefs}
+                        rowData={this.props.users}>
+                    </AgGridReact>
+                </div>
             </div>
         );
     }
+
+    onButtonClick = (e) => {
+        debugger
+        const selectedNodes = this.gridApi.getSelectedNodes();
+        const selectedData = selectedNodes.map(node => node.data)
+        const selectedDataStringPresentation = selectedData.map(node => node.firstName + ' ' + node.lastName).join(', ')
+        alert(`Selected Users: ${selectedDataStringPresentation}`)
+    }
 }
-function mapStateToProps(state) {    
+function mapStateToProps(state) {
     return {
         users: state.users
     }
 }
+
 //export default Grid;
 export default connect(
     mapStateToProps,
