@@ -13,21 +13,23 @@ export class Post extends Component {
 
     render() {
         return (
-            <ul className="list-group list-group-flush">
-                {
-                    this.props.articles.map(el =>
-                        (<li className="list-group-item" key={el.id}>
-                            {el.title}
-                        </li>))
-                }
-            </ul>
+            <React.Fragment>
+                <ul className="list-group list-group-flush">
+                    {
+                        this.props.users.map(el =>
+                            (<li className="list-group-item" key={el.firstName}>
+                                {el.firstName + " " + el.lastName}
+                            </li>))
+                    }
+                </ul>
+                </React.Fragment>
         );
     }
 }
 
 function mapStateToProps(state) {
     return {
-        articles: state.remoteArticles.slice(0, 10)
+        users: state.users.slice(0, 10)
     };
 }
 
