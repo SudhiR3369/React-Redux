@@ -46,20 +46,19 @@ class Grid extends Component {
             <div
                 className="ag-theme-balham"
                 style={{
-                    height: '1000px',
+                    height: '500px',
                     width: '100%'
                 }}
             >
-                <div style={{ height: '150px', width: '600px' }} className="ag-theme-balham">
-                    <button onClick={this.onButtonClick}>Get selected rows</button>
 
-                    <AgGridReact
-                        onGridReady={params => this.gridApi = params.api}
-                        rowSelection="multiple"
-                        columnDefs={this.state.columnDefs}
-                        rowData={this.props.users}>
-                    </AgGridReact>
-                </div>
+                <button onClick={this.onButtonClick}>Get selected rows</button>
+
+                <AgGridReact
+                    onGridReady={params => this.gridApi = params.api}
+                    rowSelection="multiple"
+                    columnDefs={this.state.columnDefs}
+                    rowData={this.props.users}>
+                </AgGridReact>
             </div>
         );
     }
