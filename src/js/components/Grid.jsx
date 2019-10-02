@@ -25,7 +25,7 @@ class Grid extends Component {
                 headerName: "Email", field: "email", sortable: true, filter: true
             },
             {
-                headerName: "RoleName", field: "roleName", sortable: true, filter: true
+                headerName: "Role", field: "roleName", sortable: true, filter: true
             },
             {
                 headerName: "Username", field: "username", sortable: true, filter: true
@@ -42,24 +42,26 @@ class Grid extends Component {
     }
 
     render() {
-        return (
-            <div
-                className="ag-theme-balham"
-                style={{
-                    height: '500px',
-                    width: '100%'
-                }}
-            >
+        return (            
+                <div
+                    id="userGrid"
+                    className="ag-theme-balham"
+                    style={{
+                        height: '600px',
+                        width: '100%'
+                    }}>               
 
-                <button onClick={this.onButtonClick}>Get selected rows</button>
+                    <button onClick={this.onButtonClick}>Get selected rows</button>
 
-                <AgGridReact
-                    onGridReady={params => this.gridApi = params.api}
-                    rowSelection="multiple"
-                    columnDefs={this.state.columnDefs}
-                    rowData={this.props.users}>
-                </AgGridReact>
-            </div>
+                    <AgGridReact
+                        pagination={true}
+                        paginationAutoPageSize={true}
+                        onGridReady={params => this.gridApi = params.api}
+                        rowSelection="multiple"
+                        columnDefs={this.state.columnDefs}
+                        rowData={this.props.users}>
+                    </AgGridReact>
+                </div>            
         );
     }
 
